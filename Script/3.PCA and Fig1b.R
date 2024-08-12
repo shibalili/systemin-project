@@ -62,7 +62,6 @@ df_pca$gentoype <- setup[rownames(df_pca),3]
 
 ggplot(df_pca,aes(x=PC1,y=PC2,color =gentoype,label=row.names(df_pca),shape=time.point))+
   geom_point(size=3,show.legend = T, stroke=1)+scale_colour_manual(name="Genotype",values= c("#dc1400", "#00AFBB"))+
-  #geom_text(size=6,vjust =-0.5, nudge_y =0.5,nudge_x = 0.5,show.legend = F)+
   ggtitle("PC1 and PC2",subtitle = "systemin:WT vs syr1")+
   scale_shape_manual(name="Time (min)",values=c(15,16,17,0,1,2))+
   scale_y_continuous(limits=c(-12, 14))+scale_x_continuous(limits=c(-20, 18))+
