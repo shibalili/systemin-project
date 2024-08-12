@@ -7,3 +7,4 @@ Figure folder has all the plots present in the paper.
 
 PPase linear regression plot (Figure2a) is a linear regression plot showing the phosphate release progress curves of different phosphatases.
 
+Run using R version 4.4.0
