@@ -6,5 +6,5 @@ Scripts folder contains all analyses(code) done in R;
 Data folder has results from analyses(scripts folder);
 Figures folder has all the plots present in the paper.
 
-Figure2a is a linear regression plot showing the kinetics of phosphatase activity over time
+Figure2a is a linear regression plot showing the phosphate release progress curves of different phosphatases.
 
