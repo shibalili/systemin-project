@@ -7,5 +7,6 @@ Figure folder has all the plots present in the paper.
 
 PPase linear regression plot (Figure2a) is a linear regression plot showing the phosphate release progress curves of different phosphatases.
 
-Run using R version 4.4.0 (macOS Monterey)
+Run using R version 4.4.0 (macOS Monterey).
+
 R packages including limma(3.60.4); ggplot2(3.5.1); tidyverse(2.0.0); missForest(1.5); stringr(1.5.1); factoextra(1.0.7); reshape2(1.4.4); hypeR(2.2.0); ggpubr(0.6.0); viridis(0.6.5)
