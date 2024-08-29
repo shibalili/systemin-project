@@ -3,7 +3,7 @@ setwd("~/Desktop/Dissertation/Publications/PLL5 paper/Manuscript/Source data/Cod
 getwd()
 library(tidyverse)
 library(ggplot2)
-###### Ave prep ######
+###### prepare the average of six biological replicates at each time point ######
 #WT sys
 int_norm <- readRDS("../Code/Data/int_norm.rds")%>%select(c(2:37)) 
 WT_S0 <- apply(int_norm[,1:6], 1, function(x){return(mean(x, na.rm = TRUE))})
