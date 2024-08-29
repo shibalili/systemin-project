@@ -4,7 +4,7 @@ getwd()
 library(tidyverse)
 library(ggplot2)
 #Solyc07g017780.3.1 951 LHA4
-#Solyc03g113405.1.1 780;949 LHA1 in ITAG3.2 which is no longer present in ITAG4 or 5  (Solyc03g113400.4.1 in ITAG4)
+#Solyc03g113405.1.1 780;949 LHA1 in ITAG3.2 which(this identifier) is no longer present in ITAG4 or 5  (Solyc03g113400.4.1 in ITAG4,sequence didn't change)
 # The Phospho-site position needs to double check in the full length protein
 # Often MaxQuant matches a site(especially conserved sites) to multiple phospho-peptide, the outcome of site position is not accurate in this case.
 # In the case of penultimate(second to last) Thr of LHA1 and LHA4
