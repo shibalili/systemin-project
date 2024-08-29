@@ -27,7 +27,8 @@ Smean_syr1 <- cbind(syr1_S0,syr1_S1,syr1_S2,syr1_S5,syr1_S15,syr1_S45)%>%as.data
 Smean <- cbind(Smean_WT,Smean_syr1)
 #saveRDS("../Code/Data/int_Smean.rds",object = Smean)
 
-## remove P_sites with same significant phosphorylation in both WT and syr1
+## remove P_sites with same significant phosphorylation in both WT and syr1 ##
+## only keep P_sites are siginificantly phosphorylated in WT ##                  
 WT <- readRDS("../Code/Data/WT_pvalue.rds")
 WT$combine <- paste(WT$P_site_ID,WT$regulation,WT$Sig_time_pointX)
 table(WT$Sig_time_pointX)
@@ -49,7 +50,7 @@ table(ppp$Sig_time_pointX)
 length(unique(ppp$P_site_ID))#883
 #saveRDS("../Code/Data/DEG_WTremsyr1.rds",object = ppp)#1299
 
-##### PCA #####
+##### PCA analysis #####
 setup <- readRDS("../Code/Data/setup_Smean.rds")
 Smean <- readRDS("../Code/Data/int_Smean.rds")
 ppp <- readRDS("../Code/Data/DEG_WTremsyr1.rds")
@@ -59,7 +60,7 @@ summary(pca)
 df_pca<- as.data.frame(pca$x)
 df_pca$time.point <- setup[rownames(setup),2]
 df_pca$gentoype <- setup[rownames(df_pca),3]
-
+## plot ##
 ggplot(df_pca,aes(x=PC1,y=PC2,color =gentoype,label=row.names(df_pca),shape=time.point))+
   geom_point(size=3,show.legend = T, stroke=1)+scale_colour_manual(name="Genotype",values= c("#dc1400", "#00AFBB"))+
   ggtitle("PC1 and PC2",subtitle = "systemin:WT vs syr1")+
