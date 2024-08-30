@@ -7,7 +7,7 @@ dat <- read.table("../Code/Data/MQ_txt/Phospho (STY)Sites.txt",header=TRUE,sep =
 dat <- dat%>%mutate(ppep.site=paste(substr(dat[,4],1,18),dat[,'Positions.within.proteins']),.before=1)
 dat <- dat[-grep("+",dat[,"Reverse"], fixed=TRUE),]#6123
 dat <- dat[-grep("+",dat[,"Potential.contaminant"], fixed=TRUE),]#6112
-dat <- dat[dat[,"Localization.prob"]>0.75,]
+dat <- dat[dat[,"Localization.prob"]>0.75,] #4804
 rownames(dat) <- dat$ppep.site
 #saveRDS("../Code/Data/dat_cleaned.rds",object = dat)
 
