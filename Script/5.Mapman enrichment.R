@@ -5,7 +5,7 @@ library(hypeR)
 library(tidyverse)
 ## background list ##
 int_norm <- readRDS("../Code/Data/int_norm.rds")%>%mutate(Protein.ID=substr(ppep.site,1,18),.after = ppep.site)
-back.ID <- unique(int_norm$Protein.ID) ##2155
+back.ID <- unique(int_norm$Protein.ID) #background protein ID:4804 ppep.sites mapping 2155 P_proteins
 
 ## gene list:Genes of Interest from 5 clusters ##
 distribution <- readRDS("../Code/Data/k5_imp10_dist.rds")
