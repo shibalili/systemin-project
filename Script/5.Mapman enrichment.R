@@ -3,20 +3,28 @@ setwd("~/Desktop/Dissertation/Publications/PLL5 paper/Manuscript/Source data/Cod
 getwd()
 library(hypeR)
 library(tidyverse)
+## background list ##
 int_norm <- readRDS("../Code/Data/int_norm.rds")%>%mutate(Protein.ID=substr(ppep.site,1,18),.after = ppep.site)
 back.ID <- unique(int_norm$Protein.ID) ##2155
+
+## gene list:Genes of Interest from different clusters ##
 distribution <- readRDS("../Code/Data/k5_imp10_dist.rds")
 summary_df <- readRDS("../Code/Data/Summary_df.rds")
 gl <- list()
 for(x in 1:5){gl[[x]]<- distribution%>%filter(WT!=syr1,WT==x)%>%pull(Protein.ID)%>%unique()}
 names(gl) <- c("k1","k2","k3","k4","k5")
 lengths(gl)
-anno <- readRDS("../Code/Data/ORA/BackID2155_Annotation_detail_bin1.rds")#Bin level:1 √ 
+
+## genesets prep from MapmanX4.2_Ensambl44(put gene.list in sets/Mapman) ##
+anno <- readRDS("../Code/Data/ORA/BackID2155_Annotation_detail_bin1.rds")#Bin level:1
 #anno <- readRDS("../Code/Data/ORA/BackID2155_Annotation_detail_bin1.1.rds")Bin level:1.1
 IDs.sum <- apply(anno[,-c(1:4)], 2, sum)
 str(IDs.sum)
-relevant.bin <-names(IDs.sum)[IDs.sum>0]#how many bins(functional groups) in background
-gl_bin <- list()
+relevant.bin <-names(IDs.sum)[IDs.sum>0] # how many bins(functional groups) in background
+
+## map protein ID(gene list) to bin ##
+## gene set involved in genelist with background gene ID ##
+gl_bin <- list() # binname for background list
 for(k in 1:5){
   gene.list <- gl[[k]]
   gene.set <- list() 
@@ -54,6 +62,8 @@ for (z in 1:5) {
   df <- data.frame(hyp_obj[[z]]$data,cluster=z)
   hyp_to_excel <- rbind(hyp_to_excel,df)}
 rownames(hyp_to_excel) <- NULL
+
+#file output:each cell contains one ID for further annotation
 y <- NULL
 for (n in 1:5) {
   s <- strsplit(hyp_obj[[n]]$data[["hits"]], split = ",")
@@ -61,6 +71,11 @@ for (n in 1:5) {
                          bin.name= rep(hyp_obj[[n]]$data[["label"]], sapply(s, length)),
                          pvalue= rep(hyp_obj[[n]]$data[["pval"]], sapply(s, length)),
                          Protein.ID = unlist(s)%>%gsub("\\s+","", .))) }# remove whitespace in a string
+
+## map protein ID to site ID: in each single cluster, ID is diff but in all clusters, protein ID could be shared
+## each cluster as one gene list which is used for mapping ppepsite ID(can not use all 7 clusters together ampping ppepsite ID )
+## add one column of ppepsite to y:diff ppepsite from the same protein will be assigned to the same bin
+
 ppep.y1 <- NULL
 for (r in 1:5) {
   site_kn <- summary_df%>%filter(WT_cluster!=syr1_cluster,WT_cluster==r)
